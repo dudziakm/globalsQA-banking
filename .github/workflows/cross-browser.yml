@@ -27,8 +27,8 @@ jobs:
     - name: Install dependencies
       run: npm ci
     
-    - name: Install Playwright browsers
-      run: npx playwright install --with-deps ${{ matrix.browser }}
+    - name: Install all Playwright browsers first
+      run: npx playwright install --with-deps
     
     - name: Run Playwright tests
       run: npm run test:${{ matrix.browser }}
