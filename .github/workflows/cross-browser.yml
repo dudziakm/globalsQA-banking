@@ -33,12 +33,4 @@ jobs:
     - name: Run Playwright tests
       run: npm run test:${{ matrix.browser }}
       env:
-        CI: true
-    
-    - name: Upload test results
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: playwright-report-${{ matrix.browser }}
-        path: playwright-report/
-        retention-days: 30 
+        CI: true 
