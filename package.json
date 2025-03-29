@@ -1,0 +1,37 @@
+{
+  "name": "pw-globalsqa",
+  "version": "1.0.0",
+  "description": "Banking Application Test Automation with Playwright",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:customer": "playwright test tests/customer-login.spec.ts tests/customer-transactions.spec.ts",
+    "test:manager": "playwright test tests/bank-manager.spec.ts",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:ci": "cross-env CI=true playwright test",
+    "test:parallel": "playwright test --workers=4",
+    "report": "playwright show-report",
+    "install:browsers": "playwright install"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "automation",
+    "banking",
+    "typescript"
+  ],
+  "author": "Michal Dudziak",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.51.1",
+    "cross-env": "^7.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  }
+}
