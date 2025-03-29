@@ -33,8 +33,9 @@ project/
 │
 ├── .github/
 │   └── workflows/       # GitHub Actions workflows
-│       ├── playwright.yml      # Main CI workflow
-│       └── cross-browser.yml   # Cross-browser testing
+│       ├── playwright.yml      # Main CI workflow (per-browser parallel jobs)
+│       ├── cross-browser.yml   # Weekly cross-browser testing
+│       └── pre-merge.yml       # Pre-merge comprehensive testing
 │
 ├── .gitignore           # Git ignore file
 ├── CONTRIBUTING.md      # Contribution guidelines
@@ -51,6 +52,7 @@ project/
 - **Direct Navigation Fallbacks** - Uses direct URL navigation when UI interactions fail
 - **Cross-browser Testing** - Supports Chromium, Firefox, and WebKit
 - **CI/CD Integration** - Configured with GitHub Actions for automated testing
+- **Parallel Testing** - Tests run in parallel across browsers for faster feedback
 
 ## Test Scenarios
 
@@ -178,22 +180,29 @@ For contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 This project is configured with GitHub Actions for continuous integration testing:
 
-### Main Workflow
+### Main Workflow (playwright.yml)
 - Runs on every push to main/master branches
 - Runs on every pull request to main/master branches
 - Runs daily at midnight UTC
-- Uses Chromium browser only for speed
+- **Parallel Jobs** - Runs tests for each browser (Chromium, Firefox, and WebKit) in parallel
+- **Browser-Specific Isolation** - Issues in one browser don't affect other test runs
 
-### Cross-Browser Workflow
+### Cross-Browser Testing (cross-browser.yml)
 - Runs weekly on Sundays
 - Can be triggered manually
-- Tests in Chromium, Firefox, and WebKit
+- Runs tests in parallel for all browsers
+- Provides a full compatibility check across all supported browsers
 
-### CI/CD Features:
-- **Automatic Test Execution** - Tests run automatically on commits and schedules
-- **Minimal Retries** - Only 1 retry in CI to quickly detect real issues
-- **Test Artifacts** - Test reports and screenshots are saved as artifacts
+### Pre-Merge Testing (pre-merge.yml)
+- Triggered when a pull request is labeled with 'ready-for-merge'
+- Runs all tests across all browsers
+- Ensures comprehensive testing before merging
+
+### CI/CD Benefits:
+- **Parallel Execution** - Multiple jobs run simultaneously for faster feedback
+- **Browser Isolation** - Browser-specific issues are clearly identified
 - **Fast Feedback** - PR checks provide immediate feedback on test status
+- **Comprehensive Coverage** - All browsers are tested before merging
 
 ## Best Practices Implemented
 
@@ -205,6 +214,7 @@ This project is configured with GitHub Actions for continuous integration testin
 - **Scalable Architecture** - Easy to add new tests and pages
 - **Defensive Navigation** - Tests use direct URLs when UI navigation is unreliable
 - **Simple Configuration** - Just two environments: local and CI
+- **Parallel Testing** - Tests run in parallel for faster execution
 
 ## Lessons Learned
 
@@ -212,4 +222,5 @@ This project is configured with GitHub Actions for continuous integration testin
 - When working with potentially flaky applications, direct URL navigation is more reliable
 - Simple environment configuration is sufficient for test automation
 - Zero retries locally helps identify issues quickly during development
-- Playwright automatically detects CI environments without manual configuration 
+- Playwright automatically detects CI environments without manual configuration
+- Running browsers in parallel jobs provides faster feedback and better isolation 

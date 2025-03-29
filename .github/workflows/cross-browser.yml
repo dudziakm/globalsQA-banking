@@ -6,14 +6,23 @@ on:
   workflow_dispatch:  # Allow manual triggering
 
 jobs:
-  test:
-    name: 'Playwright Tests - ${{ matrix.browser }}'
+  matrix-setup:
+    name: 'Matrix Setup'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    steps:
+      - run: echo "Setting up browser matrix"
+    outputs:
+      matrix: '["chromium", "firefox", "webkit"]'
+
+  test:
+    needs: matrix-setup
+    name: 'Tests on ${{ matrix.browser }}'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
-        browser: [chromium, firefox, webkit]
+        browser: ${{ fromJson(needs.matrix-setup.outputs.matrix) }}
     
     steps:
     - uses: actions/checkout@v3
@@ -27,10 +36,13 @@ jobs:
     - name: Install dependencies
       run: npm ci
     
-    - name: Install all Playwright browsers first
-      run: npx playwright install --with-deps
+    - name: Install browser
+      run: npx playwright install --with-deps ${{ matrix.browser }}
     
     - name: Run Playwright tests
       run: npm run test:${{ matrix.browser }}
       env:
-        CI: true 
+        CI: true
+        
+    - name: Browser test summary
+      run: echo "Tests completed for ${{ matrix.browser }} browser" 
