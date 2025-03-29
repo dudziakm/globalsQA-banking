@@ -9,12 +9,12 @@ Thank you for considering contributing to this test automation framework. This d
 1. Fork the repository
 2. Clone your fork:
    ```
-   git clone https://github.com/YOUR-USERNAME/PW-globalsqa.git
-   cd PW-globalsqa
+   git clone https://github.com/YOUR-USERNAME/globalsQA-banking.git
+   cd globalsQA-banking
    ```
 3. Add the upstream repository:
    ```
-   git remote add upstream https://github.com/ORIGINAL-OWNER/PW-globalsqa.git
+   git remote add upstream https://github.com/dudziakm/globalsQA-banking.git
    ```
 4. Create a new branch for your changes:
    ```

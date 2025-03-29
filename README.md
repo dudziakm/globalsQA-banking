@@ -83,6 +83,10 @@ The following test scenarios are covered:
 ### Installation
 
 1. Clone the repository
+   ```
+   git clone https://github.com/dudziakm/globalsQA-banking.git
+   cd globalsQA-banking
+   ```
 2. Install dependencies:
    ```
    npm install
@@ -164,7 +168,7 @@ To start using version control:
    ```
 4. Connect to your remote repository:
    ```
-   git remote add origin https://github.com/yourusername/PW-globalsqa.git
+   git remote add origin https://github.com/dudziakm/globalsQA-banking.git
    git push -u origin main
    ```
 
