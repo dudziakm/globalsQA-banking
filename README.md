@@ -143,6 +143,11 @@ View test reports:
 npm run report
 ```
 
+Run test Codegen:
+```
+npx playwright codegen URL/TO/THE/WEBSITE
+```
+
 ## Version Control
 
 This project includes a comprehensive `.gitignore` file configured for Playwright projects. It excludes:
