@@ -33,7 +33,7 @@
     "url": "https://github.com/dudziakm/globalsQA-banking.git"
   },
   "devDependencies": {
-    "@playwright/test": "^1.51.1",
+    "@playwright/test": "^1.60.0",
     "cross-env": "^7.0.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
